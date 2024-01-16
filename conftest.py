@@ -17,7 +17,6 @@ def driver():
     sleep(0.5)
     print("开始测试")
     driver.find_element(By.XPATH, "//a[@href='/view-ui-plus/']").click()
-    # driver.find_element(By.XPATH, "//span[@class='i-layout-header-trigger']").click()
     driver.find_element(By.XPATH, "//span[@class='i-layout-menu-side-title' and contains(., '组件')]").click()
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[@class='i-layout-menu-side-title-text' and contains(., '表单')]"))).click()
     yield driver
