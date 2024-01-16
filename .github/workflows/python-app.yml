@@ -1,6 +1,9 @@
 name: test01
 on:
-  workflow_dispatch:  
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
   test01:
     runs-on: ubuntu-latest
@@ -17,4 +20,4 @@ jobs:
       - name: Install the necessary packages
         run: pip install --upgrade pip webdriver-manager selenium pytest allure-pytest
       - name: Run the PytTest script
-        run: pytest -rA
+        run: pytest test*.py
