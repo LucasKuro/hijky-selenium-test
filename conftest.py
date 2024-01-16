@@ -9,9 +9,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 @pytest.fixture(scope="function", autouse=True)
 def driver():
-    options = Options()
-    options.add_argument("--start-maximized")
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome()
+    driver.maximize_window()
     driver.implicitly_wait(1)
     driver.get("https://iviewui.com")
     sleep(0.5)
