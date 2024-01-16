@@ -4,9 +4,10 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 jobs:
   test01:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
@@ -15,9 +16,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.10'
-      - name: Install software
-        run: sudo apt-get install -y chromium-browser
+    #Install Chrome
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+      - run: chrome --version
       - name: Install the necessary packages
         run: pip install --upgrade pip webdriver-manager selenium pytest allure-pytest
       - name: Run the PytTest script
-        run: pytest test*.py
+        run: pytest test01.py
