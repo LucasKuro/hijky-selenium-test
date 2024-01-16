@@ -16,10 +16,10 @@ def driver():
     driver.get("https://iviewui.com")
     sleep(0.5)
     print("开始测试")
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/view-ui-plus/']"))).click()
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/view-ui-plus/']"))).click()
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable(
         (By.XPATH, "//span[@class='i-layout-menu-side-title' and contains(., '组件')]"))).click()
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable(
         (By.XPATH, "//span[@class='i-layout-menu-side-title-text' and contains(., '表单')]"))).click()
     yield driver
     print("结束测试")
