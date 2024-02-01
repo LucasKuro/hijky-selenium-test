@@ -1,38 +1,22 @@
-name: WDIO Tests
-
-on: 
-  push:
-    branches-ignore:
-    - '!master' # Push events to branches matching allure-report
-    paths-ignore:
-    - 'docs/**'
-
+name: test01
+on:
+  workflow_dispatch:  
 jobs:
-  tests:
+  test01:
     runs-on: ubuntu-latest
-    name: Run WDIO tests
     steps:
-    - name: Start Selenoid Server
-      uses: Xotabu4/selenoid-github-action@v2
-    - uses: actions/checkout@v1
-    - name: Run test
-      env:
-        SELENIUM_HUB_HOST: 'localhost'
-      run: npm cit  
-    - name: Create Report
-      if: always()
-      # trying to save history of previous runs if it is exists
-      run: cp -r $(pwd)/docs/history/. $(pwd)/allure-results/history || true && npm run report
-    - uses: actions/upload-artifact@v1
-      if: always()
-      with:
-        name: allure-report
-        path: ./allure-report
-    - name: Deploy report
-      uses: JamesIves/github-pages-deploy-action@3.1.0
-      if: always()
-      with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: master # The branch the action should deploy to.
-        FOLDER: allure-report # The folder the action should deploy.
-        TARGET_FOLDER: docs
+      - name: Check out this repo
+        uses: actions/checkout@v3
+     #Setup Python   
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      # - name: Install chrome
+      #   run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - name: Install the necessary packages
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run the PytTest script
+        run: pytest -rA 
