@@ -11,7 +11,6 @@ from selenium.webdriver.support import expected_conditions as EC
 def driver():
     options = Options()
     options.add_argument('--start-maximized')
-    options.add_argument("--headless")
     driver = webdriver.Chrome(options=options)
     driver.implicitly_wait(10)
     driver.get("https://vuetifyjs.com/en/")
