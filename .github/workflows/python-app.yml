@@ -6,26 +6,18 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-    name: Run tests
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10"]
-
-    steps:
-      - uses: pavelzw/pytest-action@v2.2.0
-        with:
-          timezoneLinux: "Asia/China"
-      - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: pip install pytest pytest-md pytest-emoji selenium
-      - uses: pavelzw/pytest-action@v2
-        with:
-          emoji: false
-          verbose: false
-          job-summary: true
+     sample_job:
+      runs-on: ubuntu-latest
+      name: Pytest passing tests
+      steps:
+        - uses: actions/setup-python@v2
+          with:
+            python-version: '3.10'
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Pytest Action Step
+          id: pytest
+          uses: paolorechia/fast-pytest-github-action@develop
+          with:
+            pytest_args: 'test01.py'
+            requirements_file: 'requirements.txt'
