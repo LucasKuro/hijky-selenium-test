@@ -14,4 +14,4 @@ jobs:
       - name: Pytest
         uses: microsoft/action-python@0.7.0
         with:
-          testing: test01.py
+          testing: pytest
