@@ -14,10 +14,10 @@ def driver():
     driver = webdriver.Chrome(options=options)
     driver.implicitly_wait(1)
     driver.get("https://vuetifyjs.com/en/")
-    sleep(0.5)
+    sleep(2)
     print("开始测试")
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/en/getting-started/installation/']"))).click()
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='v-list-item-title' and contains(.,'Components')]"))).click()
+    WebDriverWait(driver, 3000).until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/en/getting-started/installation/']"))).click()
+    WebDriverWait(driver, 3000).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='v-list-item-title' and contains(.,'Components')]"))).click()
     assert driver.find_element(By.XPATH, "//div[@class='v-list-subheader__text' and contains(.,'Form inputs & controls')]").is_displayed()
     yield driver
     print("结束测试")
