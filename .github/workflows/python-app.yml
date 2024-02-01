@@ -1,32 +1,44 @@
-name: test01
+name: Pull Request
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
   workflow_dispatch:
+
 jobs:
-  scrape:
+  linting:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out this repo
-        uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Black
+        uses: microsoft/action-python@0.7.0
         with:
-          python-version: '3.10'
-      - name: Installed package list
-        run: apt list --installed
-      - name: Remove Chrome
-        run: sudo apt purge google-chrome-stable
-      - name: Remove default Chromium
-        run: sudo apt purge chromium-browser
-      - name: Install a new Chromium
-        run: sudo apt install -y chromium-browser
-      - name: Install all necessary packages
-        run: |
-          pip install chromedriver-autoinstaller selenium
-          pip install --upgrade pytest allure-pytest
-          pip install requests beautifulsoup4 pandas webdriver-manager selenium
-      - name: Run the PytTest script
-        run: pytest test01.py
+          black: true
+
+      - name: Bandit
+        uses: microsoft/action-python@0.7.0
+        with:
+          bandit: true
+
+      - name: Pylint
+        uses: microsoft/action-python@0.7.0
+        with:
+          pylint: true
+
+      - name: Pyright
+        uses: microsoft/action-python@0.7.0
+        with:
+          pyright: true
+
+      - name: Flake8
+        uses: microsoft/action-python@0.7.0
+        with:
+          flake8: true
+
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pytest
+        uses: microsoft/action-python@0.7.0
+        with:
+          testing: true
