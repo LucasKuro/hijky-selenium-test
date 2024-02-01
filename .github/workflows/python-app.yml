@@ -14,9 +14,9 @@ jobs:
         python-version: ["3.10"]
 
     steps:
-      - uses: szenius/set-timezone@v1.2
+      - uses: pavelzw/pytest-action@v2.2.0
         with:
-          timezoneLinux: "Europe/Berlin"
+          timezoneLinux: "Asia/China"
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
