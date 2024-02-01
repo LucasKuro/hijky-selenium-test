@@ -12,10 +12,12 @@ class TestIview:
     def test_goto_radio_page(self, driver):
         with allure.step("goto radio page"):
             WebDriverWait(driver, 30).until(
-                EC.presence_of_element_located((By.XPATH, "//div[@class='v-list-item-title' and contains(.,'Radio button')]"))).click()
+                EC.presence_of_element_located((By.XPATH, "//div[@class='v-list-item-title' and contains(.,'Radio "
+                                                          "button')]"))).click()
 
         with allure.step("assert radio page loading"):
-            WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//h1[contains(.,'Radio buttons')]")))
+            WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//h1[contains(.,'Radio "
+                                                                                      "buttons')]")))
             driver.save_screenshot("./result/radioPage.png")
             allure.attach.file("./result/radioPage.png", attachment_type=allure.attachment_type.PNG)
 
@@ -23,11 +25,13 @@ class TestIview:
     def test_click_windows_radio(self, driver):
         with allure.step("goto radio page"):
             WebDriverWait(driver, 30).until(
-                EC.presence_of_element_located((By.XPATH, "//div[@class='v-list-item-title' and contains(.,'Radio button')]"))).click()
+                EC.presence_of_element_located((By.XPATH, "//div[@class='v-list-item-title' and contains(.,'Radio "
+                                                          "button')]"))).click()
 
         with allure.step("selecting windows radio"):
             WebDriverWait(driver, 30).until(
-                EC.presence_of_element_located((By.XPATH, "//label[@class='v-label v-label--clickable' and contains(., 'Radio Three')]"))).click()
+                EC.presence_of_element_located((By.XPATH, "//label[@class='v-label v-label--clickable' and contains("
+                                                          "., 'Radio Three')]"))).click()
             sleep(1)
             driver.save_screenshot("./result/windowsRadio.png")
             allure.attach.file("./result/windowsRadio.png", attachment_type=allure.attachment_type.PNG)
