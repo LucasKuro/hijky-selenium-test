@@ -17,7 +17,8 @@ def driver():
     sleep(2)
     print("开始测试")
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/en/getting-started/installation/']"))).click()
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//div[@id='v-list-group--id-Components']"))).click()
+    sleep(2)
+    WebDriverWait(driver, 50).until(EC.element_to_be_clickable((By.XPATH, "//div[@id='v-list-group--id-Components']"))).click()
     assert driver.find_element(By.XPATH, "//div[@class='v-list-subheader__text' and contains(.,'Form inputs & controls')]").is_displayed()
     yield driver
     print("结束测试")
