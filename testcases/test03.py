@@ -21,6 +21,7 @@ class TestGoogleSearch:
         print("结束测试")
 
     def test_get_user_name(self):
+        sleep(60)
         with allure.step("type 谷歌地图"):
             (WebDriverWait(self.driver, 60).until(
                 EC.element_to_be_clickable((By.XPATH, "//textarea[@aria-label='搜索']"))).send_keys("谷歌地图"))
