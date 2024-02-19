@@ -4,7 +4,7 @@ import requests
 
 
 class TestGithub(unittest.TestCase):
-    token = "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"
+    token = "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"
     userName = 'LucasKuro'
 
     @pytest.fixture(scope="function", autouse=True)
