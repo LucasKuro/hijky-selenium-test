@@ -1,14 +1,12 @@
-import unittest
 import pytest
 import requests
 
 
-class TestGithub(unittest.TestCase):
-    token = "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"
-    userName = 'LucasKuro'
+class TestGithubAPI:
+    token = "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"
 
     @pytest.fixture(scope="function", autouse=True)
-    def driver(self):
+    def func(self):
         print("开始测试")
         yield
         print("结束测试")
@@ -29,4 +27,4 @@ class TestGithub(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    pytest.main(['-sv', 'test01.py'])
+    pytest.main(['-vs', 'test02.py'])
