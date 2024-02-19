@@ -1,12 +1,29 @@
 import allure
 import pytest
 from time import sleep
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 class TestIview:
+    @pytest.fixture(scope="function", autouse=True)
+    def driver(self):
+        self.driver = webdriver.Chrome()
+        self.driver.maximize_window()
+        self.driver.implicitly_wait(10)
+        self.driver.get("https://vuetifyjs.com/en/")
+        sleep(2)
+        print("开始测试")
+        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/en/getting-started"
+                                                                                   "/installation/']"))).click()
+        WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, "//div[@id='v-list-group--id-Components' "
+                                                  "and contains(., 'Components')]"))).click()
+        yield self.driver
+        print("结束测试")
+        self.driver.quit()
 
     @allure.feature("Goto_radio_page")
     def test_goto_radio_page(self, driver):
