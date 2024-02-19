@@ -13,6 +13,7 @@ class TestGoogleSearch:
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.get("https://www.google.com.hk")
+        self.driver.set_page_load_timeout(1800)
         print("开始测试")
 
     def teardown_method(self):
@@ -41,4 +42,4 @@ class TestGoogleSearch:
 
 
 if __name__ == '__main__':
-    pytest.main(['-vs', 'test03.py'])
+    pytest.main(['-vs', 'test03.py', '--alluredir=./result'])
