@@ -1,4 +1,6 @@
+import allure
 import pytest
+from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -18,15 +20,24 @@ class TestGoogleSearch:
         print("结束测试")
 
     def test_get_user_name(self):
-        (WebDriverWait(self.driver, 60).until(
-            EC.element_to_be_clickable((By.XPATH, "//textarea[@aria-label='搜索']"))).send_keys("谷歌地图"))
-        (WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//input[@aria-label='Google 搜索']"))).click())
-        (WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//div[text()='Google地圖']"))).is_displayed())
-        self.driver.back()
-        (WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, "//img[@alt='Google']"))).is_displayed())
+        with allure.step("type 谷歌地图"):
+            (WebDriverWait(self.driver, 60).until(
+                EC.element_to_be_clickable((By.XPATH, "//textarea[@aria-label='搜索']"))).send_keys("谷歌地图"))
+            sleep(10)
+        with allure.step("click enter"):
+            (WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//input[@aria-label='Google 搜索']"))).click())
+            sleep(10)
+        with allure.step("assert Google地圖 display"):
+            (WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//div[text()='Google地圖']"))).is_displayed())
+            sleep(10)
+        with allure.step("back to home page"):
+            self.driver.back()
+            sleep(10)
+        with allure.step("assert Google logo display"):
+            (WebDriverWait(self.driver, 30).until(
+                EC.element_to_be_clickable((By.XPATH, "//img[@alt='Google']"))).is_displayed())
 
 
 if __name__ == '__main__':
